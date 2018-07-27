@@ -126,10 +126,11 @@
 @property (nonatomic, strong, readonly) NSError *error;
 
 /**
- * The progress of the export on a scale from 0 to 1.
+ * The progress of the export on a scale from 0 to the duration of the asset will be exported.
  *
  *
- * A value of 0 means the export has not yet begun, 1 means the export is complete.
+ * A value of 0 means the export has not yet begun, the duration of the asset will be exported
+ * means the export is complete.
  *
  * Unlike Apple provided `AVAssetExportSession`, this property can be observed using key-value observing.
  */
