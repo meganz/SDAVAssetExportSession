@@ -309,6 +309,14 @@
 	CGSize targetSize = CGSizeMake([self.videoSettings[AVVideoWidthKey] floatValue], [self.videoSettings[AVVideoHeightKey] floatValue]);
 	CGSize naturalSize = [videoTrack naturalSize];
 	CGAffineTransform transform = videoTrack.preferredTransform;
+    
+    CGRect rect = {{0, 0}, naturalSize};
+    CGRect transformedRect = CGRectApplyAffineTransform(rect, transform);
+    // transformedRect should have origin at 0 if correct; otherwise add offset to correct it
+    transform.tx -= transformedRect.origin.x;
+    transform.ty -= transformedRect.origin.y;
+    
+    
 	// Workaround radar 31928389, see https://github.com/rs/SDAVAssetExportSession/pull/70 for more info
 	if (transform.ty == -560) {
 		transform.ty = 0;
