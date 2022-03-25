@@ -21,8 +21,9 @@ let package = Package(
         .target(
             name: "SDAVAssetExportSession",
             dependencies: [],
-            path: "Sources",
-            publicHeadersPath: "."
+            path: ".",
+            exclude: ["LICENSE", "SDAVAssetExportSession.podspec"],
+            publicHeadersPath: "Sources"
         )
     ]
 )
