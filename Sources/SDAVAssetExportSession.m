@@ -145,7 +145,16 @@
     //
     NSArray *audioTracks = [self.asset tracksWithMediaType:AVMediaTypeAudio];
     if (audioTracks.count > 0) {
-      self.audioOutput = [AVAssetReaderAudioMixOutput assetReaderAudioMixOutputWithAudioTracks:audioTracks audioSettings:nil];
+      NSDictionary *audioReaderSettings = @{
+        AVFormatIDKey: @(kAudioFormatLinearPCM),
+        AVSampleRateKey: @(44100),
+        AVNumberOfChannelsKey: @(2),
+        AVLinearPCMBitDepthKey: @(16),
+        AVLinearPCMIsFloatKey: @(NO),
+        AVLinearPCMIsBigEndianKey: @(NO),
+        AVLinearPCMIsNonInterleaved: @(NO)
+      };
+      self.audioOutput = [AVAssetReaderAudioMixOutput assetReaderAudioMixOutputWithAudioTracks:audioTracks audioSettings:audioReaderSettings];
       self.audioOutput.alwaysCopiesSampleData = NO;
       self.audioOutput.audioMix = self.audioMix;
       if ([self.reader canAddOutput:self.audioOutput])
